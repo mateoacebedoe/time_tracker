@@ -4,8 +4,11 @@ class CreateEvents < ActiveRecord::Migration
 
       t.string :title
       t.integer :time_interval #in minutes
+      t.belongs_to :category
+
 
       t.timestamps
+
     end
   end
 end

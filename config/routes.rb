@@ -5,7 +5,7 @@ TimeTracker::Application.routes.draw do
   root :to => 'categories#index'
 
   resources :categories
-  resources :event
+  resources :events
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

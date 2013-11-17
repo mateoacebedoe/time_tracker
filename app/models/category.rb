@@ -11,4 +11,9 @@ class Category < ActiveRecord::Base
     return Category.where("parent_id = ?", id)
   end
 
+  #def total_time_spent(category_id)
+  #  time_spent = events.time
+  #      total_time_spent(children_id)
+  #end
+
 end

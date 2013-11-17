@@ -1,8 +1,8 @@
 class Event < ActiveRecord::Base
 
-  bolongs_to :category
+  belongs_to :category
 
-  attr_accessible :title, :time_interval
+  attr_accessible :title, :time_interval, :category_id
 
 
 end
