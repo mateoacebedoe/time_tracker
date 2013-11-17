@@ -5,30 +5,45 @@
 <p>Average time spent per week: </p>
 <p>Average time spent per month: </p>
 
-<%= form_for :category, url: categories_path do |f| %>
-    <p>
-      <%= f.label :title %><br>
-      <%= f.text_field :title %>
-    </p>
 
-    <p>
-      <%= f.submit %>
-    </p>
-<% end %>
+<fieldset>
+  <h2>Add event</h2>
 
-<%= form_for :event, url: event_index_path do |f| %>
-    <p>
-      <%= f.label :title %><br>
-      <%= f.text_field :title %>
-    </p>
+  <%= form_for :event, url: event_index_path do |f| %>
+        <p>
+          <%= f.label :title %><br>
+          <%= f.text_field :title %>
+        </p>
 
-    <p>
-      <%= f.label :time_spent %><br>
-      <%= f.text_field :time_spent %>
-      <%= hidden_field_tag(:category_id, @category[:id]) %>
-    </p>
+        <p>
+          <%= f.label :time_spent %><br>
+          <%= f.text_field :time_spent %>
+          <%= hidden_field_tag(:category_id, @category[:id]) %>
+        </p>
 
-    <p>
-      <%= f.submit %>
-    </p>
+        <p>
+          <%= f.submit %>
+        </p>
+    <% end %>
+</fieldset>
+
+<fieldset>
+  <h2>Create subcategory</h2>
+  <%= form_for :category, url: categories_path do |f| %>
+      <p>
+        <%= f.label :title %><br>
+        <%= f.text_field :title %>
+        <%= hidden_field_tag(:parent_id, @category[:id]) %>
+      </p>
+
+      <p>
+        <%= f.submit %>
+      </p>
+  <% end %>
+</fieldset>
+
+<h2>Subcategories:</h2>
+
+<% @category.children.each do |sub_category| %>
+  <ul><a href="<%= category_path(sub_category)%>"><%= sub_category.title %></a></ul>
 <% end %>
