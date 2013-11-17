@@ -3,11 +3,21 @@
 <% end %>
 
 <h1>Title: <%= @category.title %></h1>
-<p>Total Time spent: <%= @category.total_time_spent     %></p>
-<p> Time spent this Month: </p>
-<p>Time spent this week: </p>
+<p>Total Time spent: <%= @category.total_time_spent %></p>
+<p> Time spent this Year:  <%= @category.total_time_spent("year")%></p>
+<p> Time spent this 6 months:  <%= @category.total_time_spent("6 months")%></p>
+<p> Time spent this Month:  <%= @category.total_time_spent("month")%></p>
+<p>Time spent this week: <%= @category.total_time_spent("week") %></p>
 <p>Average time spent per week: </p>
 <p>Average time spent per month: </p>
+
+<fieldset>
+<h2>Time Distribution:</h2>
+<% @category.children.each do |child| %>
+  <ul><%= "#{child.title}: #{child.total_time_spent}" %></ul>
+<% end %>
+</fieldset>
+
 
 
 <fieldset>

@@ -1,8 +1,6 @@
 class EventsController < ApplicationController
 
   def create
-
-    puts "#########################"
     puts params[:event][:time_interval].inspect
 
     @event = Event.new(title: params[:event][:title], time_interval: params[:event][:time_interval], category_id: params[:category_id])
