@@ -1,4 +1,5 @@
 class Category < ActiveRecord::Base
-  attr_accessible :title
+  has_many :events
 
+  attr_accessible :title, :parent_id
 end

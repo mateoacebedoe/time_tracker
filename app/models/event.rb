@@ -1,3 +1,8 @@
 class Event < ActiveRecord::Base
-  # attr_accessible :title, :body
+
+  bolongs_to :category
+
+  attr_accessible :title, :time_interval
+
+
 end

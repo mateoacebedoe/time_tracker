@@ -16,7 +16,7 @@
     </p>
 <% end %>
 
-<%= form_for :event, url: events_path do |f| %>
+<%= form_for :event, url: event_index_path do |f| %>
     <p>
       <%= f.label :title %><br>
       <%= f.text_field :title %>
