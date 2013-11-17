@@ -1,0 +1,34 @@
+<h1>Title: <%= @category[:title] %></h1>
+<p>Total Time spent: <%=  %></p>
+<p> Time spent this Month: </p>
+<p>Time spent this week: </p>
+<p>Average time spent per week: </p>
+<p>Average time spent per month: </p>
+
+<%= form_for :category, url: categories_path do |f| %>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
+
+    <p>
+      <%= f.submit %>
+    </p>
+<% end %>
+
+<%= form_for :event, url: events_path do |f| %>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
+
+    <p>
+      <%= f.label :time_spent %><br>
+      <%= f.text_field :time_spent %>
+      <%= hidden_field_tag(:category_id, @category[:id]) %>
+    </p>
+
+    <p>
+      <%= f.submit %>
+    </p>
+<% end %>
