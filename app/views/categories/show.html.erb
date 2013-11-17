@@ -2,8 +2,8 @@
     <%= content_tag :div, msg, class: name %>
 <% end %>
 
-<h1>Title: <%= @category[:title] %></h1>
-<p>Total Time spent: <%=  %></p>
+<h1>Title: <%= @category.title %></h1>
+<p>Total Time spent: <%= @category.total_time_spent     %></p>
 <p> Time spent this Month: </p>
 <p>Time spent this week: </p>
 <p>Average time spent per week: </p>
