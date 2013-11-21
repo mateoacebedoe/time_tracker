@@ -2,68 +2,68 @@
     <%= content_tag :div, msg, class: name %>
 <% end %>
 
-<h1>Title: <%= @category.title %></h1>
-<p>Total Time spent: <%= @category.total_time_spent %></p>
-<p> Time spent this Year:  <%= @category.total_time_spent("year")%></p>
-<p> Time spent this 6 months:  <%= @category.total_time_spent("6 months")%></p>
-<p> Time spent this Month:  <%= @category.total_time_spent("month")%></p>
-<p>Time spent this week: <%= @category.total_time_spent("week") %></p>
-<p>Average time spent per week: </p>
-<p>Average time spent per month: </p>
-
-<fieldset>
-<h2>Time Distribution:</h2>
-<% @category.children.each do |child| %>
-  <ul><%= "#{child.title}: #{child.total_time_spent}" %></ul>
-<% end %>
-</fieldset>
-
-<% if @category.title == "Root" %>
+<div class="well time-distribution">
     <fieldset>
-      <h2>Add event</h2>
-
-      <%= form_for :event, url: events_path do |f| %>
-        <p>
-          <%= f.label :title %><br>
-          <%= f.text_field :title %>
-        </p>
-
-        <p>
-          <%= f.label :time_interval %><br>
-          <%= f.text_field :time_interval %>
-          <%= hidden_field_tag(:category_id, @category[:id]) %>
-        </p>
-
-         <p>
-           <%= f.label :description %><br>
-           <%= f.text_area :description %>
-         </p>
-
-         <p>
-           <%= f.submit %>
-         </p>
+        <h2>Time Distribution:</h2>
+        <% @category.children.each do |child| %>
+            <ul><%= "#{child.title}: #{child.total_time_spent}" %></ul>
         <% end %>
     </fieldset>
-<% end %>
+</div>
 
-
+<% if @category.title == "Root" %>
+    <div class="well add-event">
         <fieldset>
-  <h2>Create subcategory</h2>
-  <%= form_for :category, url: categories_path do |f| %>
-      <p>
-        <%= f.label :title %><br>
-        <%= f.text_field :title %>
-        <%= hidden_field_tag(:parent_id, @category[:id]) %>
-      </p>
+          <h2>Add event</h2>
 
-      <p>
-        <%= f.submit %>
-      </p>
-  <% end %>
-</fieldset>
+          <%= form_for :event, url: events_path do |f| %>
+            <p>
+              <%= f.label :title %><br>
+              <%= f.text_field :title %>
+            </p>
 
-<h2>Subcategories:</h2>
+            <p>
+              <%= f.label :time_interval %><br>
+              <%= f.text_field :time_interval %>
+              <%= hidden_field_tag(:category_id, @category[:id]) %>
+            </p>
 
-<% @category.children.each do |sub_category| %>
-  <ul><a href="<%= category_path(sub_category)%>"><%= sub_category.title %></a></ul>
+             <p>
+               <%= f.label :description %><br>
+               <%= f.text_area :description %>
+             </p>
+
+             <p>
+               <%= f.submit %>
+             </p>
+            <% end %>
+        </fieldset>
+    </div>
 <% end %>
+
+<div class="well add-subcategory">
+    <fieldset>
+        <h2>Create subcategory</h2>
+
+        <%= form_for :category, url: categories_path do |f| %>
+            <p>
+                <%= f.label :title %><br>
+                <%= f.text_field :title %>
+                <%= hidden_field_tag(:parent_id, @category[:id]) %>
+            </p>
+
+            <p>
+                <%= f.submit %>
+            </p>
+        <% end %>
+    </fieldset>
+</div>
+
+
+<div class="well subcategories">
+  <h2>Subcategories:</h2>
+
+  <% @category.children.each do |sub_category| %>
+      <li><a href="<%= category_path(sub_category)%>"><%= sub_category.title %></a></li>
+    <% end %>
+</div>
