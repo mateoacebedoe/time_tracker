@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
 
   belongs_to :category
 
-  attr_accessible :title, :time_interval, :category_id
+  attr_accessible :title, :time_interval, :category_id, :description
 
   scope :events_for_month, ->(category_id) { where("created_at > ? AND category_id = ?", (Date.today - 1.month), category_id) }
   scope :events_for_6_months, ->(category_id) { where("created_at > ? AND category_id = ?", (Date.today - 6.months), category_id) }

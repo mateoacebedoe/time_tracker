@@ -3,7 +3,12 @@ class EventsController < ApplicationController
   def create
     puts params[:event][:time_interval].inspect
 
-    @event = Event.new(title: params[:event][:title], time_interval: params[:event][:time_interval], category_id: params[:category_id])
+    title = params[:event][:title]
+    time_interval = params[:event][:time_interval]
+    category_id = params[:category_id]
+    description = params[:event][:description]
+
+    @event = Event.new(title: title, time_interval: time_interval, category_id: category_id, description: description)
 
     if @event.save
       flash[:notice] = "Successfully added the event"

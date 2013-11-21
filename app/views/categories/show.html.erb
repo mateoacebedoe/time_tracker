@@ -18,12 +18,11 @@
 <% end %>
 </fieldset>
 
+<% if @category.title == "Root" %>
+    <fieldset>
+      <h2>Add event</h2>
 
-
-<fieldset>
-  <h2>Add event</h2>
-
-  <%= form_for :event, url: events_path do |f| %>
+      <%= form_for :event, url: events_path do |f| %>
         <p>
           <%= f.label :title %><br>
           <%= f.text_field :title %>
@@ -35,13 +34,20 @@
           <%= hidden_field_tag(:category_id, @category[:id]) %>
         </p>
 
-        <p>
-          <%= f.submit %>
-        </p>
-    <% end %>
-</fieldset>
+         <p>
+           <%= f.label :description %><br>
+           <%= f.text_area :description %>
+         </p>
 
-<fieldset>
+         <p>
+           <%= f.submit %>
+         </p>
+        <% end %>
+    </fieldset>
+<% end %>
+
+
+        <fieldset>
   <h2>Create subcategory</h2>
   <%= form_for :category, url: categories_path do |f| %>
       <p>

@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20131117021848) do
   create_table "events", :force => true do |t|
     t.string   "title"
     t.integer  "time_interval"
+    t.string   "description"
     t.integer  "category_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
