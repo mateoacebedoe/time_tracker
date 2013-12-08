@@ -4,7 +4,11 @@ TimeTracker::Application.routes.draw do
 
   root :to => 'categories#index'
 
-  resources :categories, :only => [:index, :show, :create]
+  resources :categories, :only => [:index, :show, :create] do
+    collection do
+      get 'data'
+    end
+  end
   resources :events, :only => [:create]
 
   # Sample of regular route:

@@ -13,6 +13,8 @@ Category.create(title: "Soccer", parent_id: 2)
 
 Event.create(title: "Soccer", time_interval: 60, category_id: 4, description: "")
 Event.create(title: "Soccer", time_interval: 60, category_id: 4, description: "some footy")
+Event.create(title: "Auto Suggestion", time_interval: 60, category_id: 3, description: "whatever")
+
 
 Event.create(title: "tennis", time_interval: 40, category_id: 2, description: "")
 
