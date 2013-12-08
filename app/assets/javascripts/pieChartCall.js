@@ -24,7 +24,7 @@ $(function () {
 //        console.log(JSON.stringify(data));
 //}
 
-create_pie_chart_for("Root");
+    create_pie_chart_for("Root");
 
 });
 
@@ -37,7 +37,10 @@ function create_pie_chart_for(category_name){
     $.post(path, data)
         .done(function(data) {
             console.log("ajax success");
+            new_element = data.pop();
+            add_element_to_bread_crumb(new_element);
             console.log("data: " + JSON.stringify(data));
+            console.log("html: " + new_element);
             create_pie(data);
         })
         .fail(function() {
@@ -89,6 +92,19 @@ function pieClick(event, pos, obj)
     //percent = parseFloat(obj.series.percent).toFixed(2);
     create_pie_chart_for("" +obj.series.label);
     }
+
+function add_element_to_bread_crumb(new_element){
+    $(".breadcrumb").html(new_element);
+    }
+
+function click_bread_crumb_element(){
+    console.log("Click registered");
+//    category_name = $(this).html();
+//    console.log(category_name);
+//    create_pie_chart_for(category);
+}
+
+
 
 
 

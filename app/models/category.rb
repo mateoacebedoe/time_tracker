@@ -45,7 +45,24 @@ class Category < ActiveRecord::Base
     Event.events_for_6_months(self)
   end
 
+  def full_bread_crumb_trail_html
+    #if category == root return the html of that category
+    #else
+    #return html of that category + (prepend) full_bread_crumb_trail_html of parent
+    #
+
+    if parent_id == 0
+      return bread_crumb_html
+    else
+      return parent.full_bread_crumb_trail_html + bread_crumb_html
+    end
+  end
+
   private
+
+  def bread_crumb_html
+    return '<li><a class="bread" href="#">' + title + '</a>&nbsp / &nbsp</li>'
+  end
 
   def events_for(time_period)
 

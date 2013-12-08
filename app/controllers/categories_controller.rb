@@ -9,11 +9,6 @@ class CategoriesController < ApplicationController
   end
 
   def data
-    puts "#######################"
-    puts params[:category_name].inspect
-    puts "#######################"
-
-
     @category = Category.find_by_title(params[:category_name])
     data = Array.new()
 
@@ -23,6 +18,8 @@ class CategoriesController < ApplicationController
       hash[:data] = child.total_time_spent
       data << hash
     end
+
+    data << @category.full_bread_crumb_trail_html
 
     render json: data
   end
