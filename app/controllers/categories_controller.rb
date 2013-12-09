@@ -4,10 +4,6 @@ class CategoriesController < ApplicationController
     @category = Category.find(1)
   end
 
-  def show
-    @category = Category.where(id: params[:id]).first
-  end
-
   def data
     @category = Category.find_by_title(params[:category_name])
     data = Array.new()

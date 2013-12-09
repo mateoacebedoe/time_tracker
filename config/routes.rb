@@ -4,7 +4,7 @@ TimeTracker::Application.routes.draw do
 
   root :to => 'categories#index'
 
-  resources :categories, :only => [:index, :show, :create] do
+  resources :categories, :only => [:index, :create] do
     collection do
       get 'data'
     end
