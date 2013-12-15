@@ -6,18 +6,26 @@ class CategoriesController < ApplicationController
 
   def data
     @category = Category.find_by_title(params[:category_name])
-    data = Array.new()
+    time_period = params[:time_period]
 
+    full_data = Hash.new()
+    pie_data = Array.new()
     @category.children.each_with_index do |child, i|
-      hash = Hash.new()
-      hash[:label] = child.title
-      hash[:data] = child.total_time_spent
-      data << hash
+      children_info = Hash.new()
+      children_info[:label] = child.title
+      children_info[:data] = child.total_time_spent(time_period)
+      pie_data << children_info
     end
 
-    data << @category.full_bread_crumb_trail_html
+    category_general_data = {
+      :time => @category.total_time_spent,
+      :ancestry_titles => @category.ancestry.map { |category| category.title}
+    }
 
-    render json: data
+    full_data[:pie_data] = pie_data
+    full_data[:category_general_data] = category_general_data
+
+    render json: full_data
   end
 
   def create

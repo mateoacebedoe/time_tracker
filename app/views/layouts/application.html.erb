@@ -55,22 +55,7 @@
     </div>
 
     <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well general-info">
-            <ul class="nav nav-list">
-              <li class="nav-header"><%= @category.title %></li>
-              <li>Total Time spent: <%= @category.total_time_spent %></li>
-              <li> Time spent this Year:  <%= @category.total_time_spent("year")%></li>
-              <li> Time spent this 6 months:  <%= @category.total_time_spent("6 months")%></li>
-              <li> Time spent this Month:  <%= @category.total_time_spent("month")%></li>
-              <li>Time spent this week: <%= @category.total_time_spent("week") %></li>
-              <li>Average time spent per week: </li>
-              <li>Average time spent per month: </li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9">
+        <div class="span12">
           <%= bootstrap_flash %>
           <%= yield %>
         </div>

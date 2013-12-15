@@ -15,7 +15,7 @@ class Category < ActiveRecord::Base
     return !children.empty?
   end
 
-  def total_time_spent(time_period = "beginning of time")
+  def total_time_spent(time_period = "Beginning of Time")
 
     events_array = events_for(time_period)
     time_spent = Event.sum_times_of(events_array)
@@ -46,15 +46,19 @@ class Category < ActiveRecord::Base
   end
 
   def full_bread_crumb_trail_html
-    #if category == root return the html of that category
-    #else
-    #return html of that category + (prepend) full_bread_crumb_trail_html of parent
-    #
-
     if parent_id == 0
       return bread_crumb_html
     else
       return parent.full_bread_crumb_trail_html + bread_crumb_html
+    end
+  end
+
+  ##returns an array containing the ancestry of this category example: [great_grand_parent, grand_parent, parent]
+  def ancestry
+    if parent_id == 0
+      return []
+    else
+      return [parent.ancestry, parent].flatten!
     end
   end
 
@@ -66,13 +70,13 @@ class Category < ActiveRecord::Base
 
   def events_for(time_period)
 
-    if time_period == "month"
+    if time_period == "Month"
       events_array = events_for_last_30_days
-    elsif time_period == "week"
+    elsif time_period == "Week"
       events_array = events_for_last_7_days
-    elsif time_period == "6 months"
+    elsif time_period == "6 Months"
       events_array = events_for_last_6_months
-    elsif time_period == "year"
+    elsif time_period == "Year"
       events_array = events_for_last_year
     else
       events_array = events

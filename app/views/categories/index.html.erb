@@ -6,6 +6,8 @@
 
 <div id="interactive" style="width:600px;height:300px"></div>
 
+<div class="well time"></div>
+
 <div class="well time-distribution">
   <fieldset>
     <h2>Time Distribution:</h2>
@@ -64,9 +66,5 @@
 </div>
 
 <div class="well subcategories">
-  <h2>Subcategories:</h2>
 
-  <% @category.children.each do |sub_category| %>
-      <li><a href="<%= category_path(sub_category)%>"><%= sub_category.title %></a></li>
-  <% end %>
 </div>

@@ -1,47 +1,42 @@
+//note: currently doing the time period ajax stuff, need to concentrate in fixing the poping on the data array and the rendering of the new information
+
+
 $(function () {
-    // data
-    /*var data = [
-     { label: "Series1",  data: 10},
-		{ label: "Series2",  data: 30},
-		{ label: "Series3",  data: 90},
-		{ label: "Series4",  data: 70},
-		{ label: "Series5",  data: 80},
-		{ label: "Series6",  data: 110}
-];*/
-/*var data = [
-		{ label: "Series1",  data: [[1,10]]},
-		{ label: "Series2",  data: [[1,30]]},
-		{ label: "Series3",  data: [[1,90]]},
-		{ label: "Series4",  data: [[1,70]]},
-		{ label: "Series5",  data: [[1,80]]},
-		{ label: "Series6",  data: [[1,0]]}
-];*/
-//var data = [];
-//var series = Math.floor(Math.random()*10)+1;
-//for( var i = 0; i<series; i++)
-//	{
-//        data[i] = { label: "Series"+(i+1), data: Math.floor(Math.random()*100)+1 }
-//        console.log(JSON.stringify(data));
-//}
-
-    create_pie_chart_for("Root");
-
+  create_pie_chart_for("Root", "Month");
 });
 
-function create_pie_chart_for(category_name){
-    console.log(category_name);
+function create_pie_chart_for(category_name, time_period){
+    console.log("=========creating new pie chart============")
+    console.log("category name: " + category_name);
+    console.log("time period: " + time_period);
     var path = "categories/data";
     var data = {};
     data['category_name'] = category_name;
+    data['time_period'] = time_period;
+
     data._method = 'get';
+
     $.post(path, data)
         .done(function(data) {
-            console.log("ajax success");
-            new_element = data.pop();
-            add_element_to_bread_crumb(new_element);
-            console.log("data: " + JSON.stringify(data));
-            console.log("html: " + new_element);
-            create_pie(data);
+            console.log("=====ajax success======");
+            console.log("FULL DATA: " + JSON.stringify(data));
+
+            pie_data = data["pie_data"];
+            category_general_data = data["category_general_data"];
+
+            console.log("pie_data: " + JSON.stringify(pie_data));
+            console.log("category_general_data: " + JSON.stringify(category_general_data));
+            console.log("anestry_titles: " + JSON.stringify(category_general_data["ancestry_titles"]));
+
+            render_breadcrumb(category_general_data["ancestry_titles"]);
+
+            if(!jQuery.isEmptyObject(pie_data)) {
+                render_pie(pie_data);
+            }
+            else {
+                render_nothing();
+            }
+            render_time(category_general_data["time"]);
         })
         .fail(function() {
             console.log("ajax fail");
@@ -49,8 +44,8 @@ function create_pie_chart_for(category_name){
         })
 }
 
-function create_pie(data){
-    // INTERACTIVE
+function render_pie(data){
+    console.log("#####rendering pie####");
     $.plot($("#interactive"), data,
         {
             series: {
@@ -74,6 +69,8 @@ function create_pie(data){
 
     $("#interactive").bind("plothover", pieHover);
     $("#interactive").bind("plotclick", pieClick);
+    console.log("#####finishing rendering pie####");
+
 }
 
 
@@ -83,27 +80,37 @@ function pieHover(event, pos, obj)
     return;
     percent = parseFloat(obj.series.percent).toFixed(2);
     $("#hover").html('<span style="font-weight: bold; color: '+obj.series.color+'">'+obj.series.label+' ('+percent+'%)</span>');
-    }
+}
 
 function pieClick(event, pos, obj)
 {
     if (!obj)
     return;
     //percent = parseFloat(obj.series.percent).toFixed(2);
-    create_pie_chart_for("" +obj.series.label);
-    }
-
-function add_element_to_bread_crumb(new_element){
-    $(".breadcrumb").html(new_element);
-    }
-
-function click_bread_crumb_element(){
-    console.log("Click registered");
-//    category_name = $(this).html();
-//    console.log(category_name);
-//    create_pie_chart_for(category);
+    create_pie_chart_for("" +obj.series.label, "month");
 }
 
+function render_breadcrumb(ancestry){
+    console.log("bread_crum function: element: " + JSON.stringify(ancestry));
+    html = "";
+    ancestry.forEach(function(cateogry_title){
+        html += '<li><a class="bread" href="#">' + cateogry_title + '</a>&nbsp / &nbsp</li>'
+    });
+
+    console.log("html :" + html);
+    $(".breadcrumb").html(html);
+}
+
+function render_time(time){
+    html = '<h2> Time: ' + time + '</h2>'
+    $(".time").html(html);
+}
+
+function render_nothing(){
+    html = '<h2> DOES NOT HAVE CHILDREN</h2>'
+    $("#interactive").html(html);
+    console.log("####DID NOT RENDER THE PIE#####");
+}
 
 
 
