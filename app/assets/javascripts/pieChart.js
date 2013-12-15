@@ -2,7 +2,13 @@
 
 
 $(function () {
+  $("#Month").attr("class", "btn time_button btn-success")
+
   create_pie_chart_for("Root", "Month");
+
+  $(".time_button").click(function(){
+     change_time_period($(this));
+  });
 });
 
 function create_pie_chart_for(category_name, time_period){
@@ -112,6 +118,18 @@ function render_nothing(){
     console.log("####DID NOT RENDER THE PIE#####");
 }
 
+function change_time_period(new_time_period_node){
+    var current_time_period_node = $(".btn.time_button.btn-success");
+    if( current_time_period_node === new_time_period_node){
+        return;
+    }
+    else{
+        current_time_period_node.attr("class", "btn time_button");
+        new_time_period_node.attr("class", "btn time_button btn-success");
+        var time_period = new_time_period_node.text();
+        create_pie_chart_for("Root", time_period);
+    }
+}
 
 
 

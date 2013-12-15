@@ -16,7 +16,6 @@ class Category < ActiveRecord::Base
   end
 
   def total_time_spent(time_period = "Beginning of Time")
-
     events_array = events_for(time_period)
     time_spent = Event.sum_times_of(events_array)
 
@@ -71,14 +70,22 @@ class Category < ActiveRecord::Base
   def events_for(time_period)
 
     if time_period == "Month"
+      puts "month"
       events_array = events_for_last_30_days
     elsif time_period == "Week"
+      puts "week"
+
       events_array = events_for_last_7_days
     elsif time_period == "6 Months"
+      puts "6months"
+
       events_array = events_for_last_6_months
     elsif time_period == "Year"
+      puts "year"
+
       events_array = events_for_last_year
     else
+      puts "beg of time"
       events_array = events
     end
     return events_array

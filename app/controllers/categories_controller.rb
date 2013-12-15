@@ -8,6 +8,11 @@ class CategoriesController < ApplicationController
     @category = Category.find_by_title(params[:category_name])
     time_period = params[:time_period]
 
+    puts "==============category============="
+    puts params[:category_name]
+    puts "==============category============="
+
+
     full_data = Hash.new()
     pie_data = Array.new()
     @category.children.each_with_index do |child, i|
@@ -18,7 +23,7 @@ class CategoriesController < ApplicationController
     end
 
     category_general_data = {
-      :time => @category.total_time_spent,
+      :time => @category.total_time_spent(time_period),
       :ancestry_titles => @category.ancestry.map { |category| category.title}
     }
 
