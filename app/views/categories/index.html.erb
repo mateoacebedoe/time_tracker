@@ -2,78 +2,66 @@
     <%= content_tag :div, msg, class: name %>
 <% end %>
 
-<ol class="breadcrumb"></ol>
+<div class="row-fluid">
 
-<div class="btn-group">
-  <button type="button" class="btn time_button" id="Week">Week</button>
-  <button type="button" class="btn time_button" id="Month">Month</button>
-  <button type="button" class="btn time_button" id="6_Months">6 Months</button>
-  <button type="button" class="btn time_button" id="year">Year</button>
-  <button type="button" class="btn time_button" id="Beginning_of_time">Beginning of Time</button>
-</div>
-
-<div id="interactive" style="width:600px;height:300px"></div>
-
-<div class="well time"></div>
-
-
-<div class="well time-distribution">
-  <fieldset>
-    <h2>Time Distribution:</h2>
-    <% @category.children.each do |child| %>
-        <ul><%= "#{child.title}: #{child.total_time_spent}" %></ul>
-    <% end %>
-  </fieldset>
-</div>
-
-<% if @category.title == "Root" %>
-    <div class="well add-event">
-      <fieldset>
-        <h2>Add event</h2>
-
-        <%= form_for :event, url: events_path do |f| %>
-            <p>
-              <%= f.label :title %><br>
-              <%= f.text_field :title %>
-            </p>
-
-            <p>
-              <%= f.label :time_interval %><br>
-              <%= f.text_field :time_interval %>
-              <%= hidden_field_tag(:category_id, @category[:id]) %>
-            </p>
-
-            <p>
-              <%= f.label :description %><br>
-              <%= f.text_area :description %>
-            </p>
-
-            <p>
-              <%= f.submit %>
-            </p>
-        <% end %>
-      </fieldset>
+    <div class="pie_chart span9">
+        <ol class="breadcrumb"></ol>
+        <div id="interactive"></div>
+        <div class="btn-group time_period">
+            <button type="button" class="btn time_button" id="Week">Week</button>
+            <button type="button" class="btn time_button" id="Month">Month</button>
+            <button type="button" class="btn time_button" id="6_Months">6 Months</button>
+            <button type="button" class="btn time_button" id="year">Year</button>
+            <button type="button" class="btn time_button" id="Beginning_of_time">Beginning of Time</button>
+        </div>
     </div>
-<% end %>
 
-<div class="well add-subcategory">
-  <fieldset>
-    <h2>Create subcategory</h2>
+    <div class="well add_elements span3">
+      <div class="add_event span12">
+          <fieldset>
+            <h2>Add event</h2>
 
-    <%= form_for :category, url: categories_path do |f| %>
-        <p>
-          <%= f.label :title %><br>
-          <%= f.text_field :title %>
-          <%= hidden_field_tag(:parent_id, @category[:id]) %>
-        </p>
+            <%= form_for :event, url: events_path do |f| %>
+                <%= f.label :title %>
+                <input class="event_title" type="text" data-role="tagsinput" />
 
-        <p>
-          <%= f.submit %>
-        </p>
-    <% end %>
-  </fieldset>
+                <p>
+                  <%= f.label :time_interval %>
+                  <%= f.text_field :time_interval %>
+                  <%= hidden_field_tag(:category_id, @category[:id]) %>
+                </p>
+
+                <p>
+                  <%= f.label :description %>
+                  <%= f.text_area :description, size: "3" %>
+                </p>
+
+                <p>
+                  <%= f.submit %>
+                </p>
+            <% end %>
+          </fieldset>
+      </div>
+
+      <div class="add_subcategory span12">
+        <fieldset>
+          <h2>Add category</h2>
+
+          <%= form_for :category, url: categories_path do |f| %>
+              <p>
+                <%= f.label :title %><br>
+                <%= f.text_field :title %>
+                <%= hidden_field_tag(:parent_id, @category[:id]) %>
+              </p>
+
+              <p>
+                <%= f.submit %>
+              </p>
+          <% end %>
+        </fieldset>
+      </div>
+    </div>
 </div>
 
-<div class="well subcategories">
+<div class="well time span12"></div>
 
-</div>

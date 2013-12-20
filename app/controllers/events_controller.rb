@@ -31,4 +31,13 @@ class EventsController < ApplicationController
 
   end
 
+  def in_database
+    event_titles_array = []
+    Event.uniq.pluck(:title).each do |event_title|
+      event_titles_array << event_title
+    end
+
+    render json: event_titles_array
+  end
+
 end

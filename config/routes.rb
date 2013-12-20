@@ -9,7 +9,11 @@ TimeTracker::Application.routes.draw do
       get 'data'
     end
   end
-  resources :events, :only => [:create]
+  resources :events, :only => [:create] do
+    collection do
+      get 'in_database'
+    end
+  end
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

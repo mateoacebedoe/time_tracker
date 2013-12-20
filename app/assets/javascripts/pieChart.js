@@ -34,7 +34,7 @@ function create_pie_chart_for(category_name, time_period){
             console.log("category_general_data: " + JSON.stringify(category_general_data));
             console.log("anestry_titles: " + JSON.stringify(category_general_data["ancestry_titles"]));
 
-            render_breadcrumb(category_general_data["ancestry_titles"]);
+            render_breadcrumb(category_name, category_general_data["ancestry_titles"]);
 
             if(!jQuery.isEmptyObject(pie_data)) {
                 render_pie(pie_data);
@@ -57,7 +57,7 @@ function render_pie(data){
             series: {
                 pie: {
                     show: true,
-                    radius:150,
+                    radius:300,
                     label:{
                         show: true,
                         radius: 1/2,
@@ -90,18 +90,23 @@ function pieHover(event, pos, obj)
 
 function pieClick(event, pos, obj)
 {
+    var current_time_period = $(".btn.time_button.btn-success").text();
+    console.log("{}{}{}{}{}{}time_period: " + JSON.stringify($(".btn.time_button.btn-success").text()));
+
     if (!obj)
     return;
-    //percent = parseFloat(obj.series.percent).toFixed(2);
-    create_pie_chart_for("" +obj.series.label, "month");
+    create_pie_chart_for("" +obj.series.label, current_time_period);
 }
 
-function render_breadcrumb(ancestry){
-    console.log("bread_crum function: element: " + JSON.stringify(ancestry));
+//this ca
+function render_breadcrumb(category_title, category_ancestry){
+    console.log("bread_crum function: element: " + JSON.stringify(category_ancestry));
     html = "";
-    ancestry.forEach(function(cateogry_title){
-        html += '<li><a class="bread" href="#">' + cateogry_title + '</a>&nbsp / &nbsp</li>'
+    category_ancestry.forEach(function(ancestor_category_title){
+        html += '<li><a class="bread" href="#">' + ancestor_category_title + '</a>&nbsp / &nbsp</li>'
     });
+
+    html += '<li class="active">' + category_title + '</a>&nbsp / &nbsp</li>'
 
     console.log("html :" + html);
     $(".breadcrumb").html(html);
