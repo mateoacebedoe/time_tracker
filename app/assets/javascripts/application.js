@@ -14,5 +14,5 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 
-//= require pieChart
+//= require pie-chart-helper.js
 //= require_tree .
