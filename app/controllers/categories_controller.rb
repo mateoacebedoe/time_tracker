@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-#this is a test commit to check if pushing and pulling works on my windows machine
+#this is a test commit to check if pushing and pulling works on my linux local machine
   def index
     @category = Category.find(1)
   end
