@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-#this is a test commit to check if pushing and pulling works on my linux local machine and RubyMine
+#this is a test commit to check if pushing and pulling works on my linuxx local machine and RubyMine
   def index
     @category = Category.find(1)
   end
