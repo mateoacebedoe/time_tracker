@@ -1,0 +1,20 @@
+<% flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, class: name %>
+<% end %>
+
+<div class="row-fluid">
+    <div class="pie_chart span9">
+        <ol class="breadcrumb"></ol>
+        <div id="interactive"></div>
+        <div class="btn-group time_period">
+            <button type="button" class="btn time_button" id="Week">Week</button>
+            <button type="button" class="btn time_button" id="Month">Month</button>
+            <button type="button" class="btn time_button" id="6_Months">6 Months</button>
+            <button type="button" class="btn time_button" id="year">Year</button>
+            <button type="button" class="btn time_button" id="Beginning_of_time">Beginning of Time</button>
+        </div>
+    </div>
+</div>
+
+<div class="well time span12"></div>
+

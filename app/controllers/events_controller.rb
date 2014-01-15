@@ -1,5 +1,9 @@
 class EventsController < ApplicationController
 
+  def index
+    @category = Category.find(1)
+  end
+
   def create
     puts params[:event][:time_interval].inspect
 
@@ -17,18 +21,6 @@ class EventsController < ApplicationController
     end
 
     redirect_to category_path(params[:category_id])
-  end
-
-  def edit
-
-  end
-
-  def update
-
-  end
-
-  def destroy
-
   end
 
   def in_database

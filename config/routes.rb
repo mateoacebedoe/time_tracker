@@ -2,14 +2,16 @@ TimeTracker::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  root :to => 'categories#index'
+  root :to => 'events#index'
 
-  resources :categories, :only => [:index, :create] do
+  resources :categories, :only => [:create] do
     collection do
       get 'data'
-    end
+      get 'analyze'
+      end
   end
-  resources :events, :only => [:create] do
+
+  resources :events, :only => [:create, :index] do
     collection do
       get 'in_database'
     end
@@ -60,7 +62,7 @@ TimeTracker::Application.routes.draw do
   #   end
 
   # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
+  # just remember to delete public/analyze.html.
 
   # See how all your routes lay out with "rake routes"
 

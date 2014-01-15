@@ -1,1 +1,49 @@
-<h1> hello</h1>
+<% flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, class: name %>
+<% end %>
+
+<div class="well add_elements span3">
+  <div class="add_event span12">
+    <fieldset>
+      <h2>Add event</h2>
+
+      <%= form_for :event, url: events_path do |f| %>
+          <%= f.label :title %>
+          <input class="event_title" type="text" data-role="tagsinput" />
+
+          <p>
+            <%= f.label :time_interval %>
+            <%= f.text_field :time_interval %>
+            <%= hidden_field_tag(:category_id, @category[:id]) %>
+          </p>
+
+          <p>
+            <%= f.label :description %>
+            <%= f.text_area :description, size: "3" %>
+          </p>
+
+          <p>
+            <%= f.submit %>
+          </p>
+      <% end %>
+    </fieldset>
+  </div>
+
+  <div class="add_subcategory span12">
+    <fieldset>
+      <h2>Add category</h2>
+
+      <%= form_for :category, url: categories_path do |f| %>
+          <p>
+            <%= f.label :title %><br>
+            <%= f.text_field :title %>
+            <%= hidden_field_tag(:parent_id, @category[:id]) %>
+          </p>
+
+          <p>
+            <%= f.submit %>
+          </p>
+      <% end %>
+    </fieldset>
+  </div>
+</div>

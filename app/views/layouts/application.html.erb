@@ -44,10 +44,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand span12" href="#">TimeTracker</a>
-          <div class="container-fluid nav-collapse span0">
-            <ul class="nav ">
-              <li><%= link_to "logout", "/path1"  %></li>
+          <div class="container-fluid nav-collapse8">
+            <ul class="nav navbar-nav">
+              <li><a class="brand" href="#">TimeTracker</a></li>
+              <li><a href="<%= root_path %>">Logger</a></li>
+              <li><a href="<%= analyze_categories_path %>">Analytics</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -59,13 +60,8 @@
           <%= bootstrap_flash %>
           <%= yield %>
         </div>
-      </div><!--/row-->
-
-      <footer>
-        <p>&copy; Company 2013</p>
-      </footer>
-
-    </div> <!-- /container -->
+    </div><!--/row-->
+  </div> <!-- /container -->
 
     <!-- Javascripts
     ================================================== -->
