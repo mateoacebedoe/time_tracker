@@ -5,44 +5,51 @@
 <div class="well add_elements span3">
   <div class="add_event span12">
     <fieldset>
-      <h2>Add event</h2>
+      <h2>Add Event</h2>
 
-      <%= form_for :event, url: events_path do |f| %>
-          <%= f.label :title %>
-          <input class="event_title" type="text" data-role="tagsinput" />
-
+      <%= form_for @event do |f| %>
+          <p>
+            <%= f.label :category_tokens, "Event Name" %>
+            <%= f.text_field(:category_tokens) %>
+          </p>
           <p>
             <%= f.label :time_interval %>
             <%= f.text_field :time_interval %>
-            <%= hidden_field_tag(:category_id, @category[:id]) %>
           </p>
 
           <p>
-            <%= f.label :description %>
-            <%= f.text_area :description, size: "3" %>
+            <%= label_tag(:description) %>
+            <%= f.text_area :description %>
           </p>
 
           <p>
-            <%= f.submit %>
+            <%= submit_tag("Create") %>
           </p>
+
       <% end %>
+
     </fieldset>
   </div>
 
-  <div class="add_subcategory span12">
+  <div class="add_category span12">
     <fieldset>
-      <h2>Add category</h2>
+      <h2>Add Category</h2>
 
-      <%= form_for :category, url: categories_path do |f| %>
+      <%= form_for @category do |f| %>
           <p>
-            <%= f.label :title %><br>
-            <%= f.text_field :title %>
-            <%= hidden_field_tag(:parent_id, @category[:id]) %>
+            <%= f.label :name %>
+            <%= f.text_field :name %>
           </p>
 
           <p>
-            <%= f.submit %>
+            <%= f.label :category_tokens, "Category Parent" %>
+            <%= f.text_field(:category_tokens) %>
           </p>
+
+          <p>
+            <%= submit_tag("Create") %>
+          </p>
+
       <% end %>
     </fieldset>
   </div>

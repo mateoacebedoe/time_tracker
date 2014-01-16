@@ -15,7 +15,7 @@ function create_pie_chart_for(category_name, time_period){
     console.log("=========creating new pie chart============")
     console.log("category name: " + category_name);
     console.log("time period: " + time_period);
-    var path = "data";
+    var path = "pie_data";
     var data = {};
     data['category_name'] = category_name;
     data['time_period'] = time_period;

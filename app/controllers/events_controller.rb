@@ -1,35 +1,21 @@
 class EventsController < ApplicationController
 
   def index
-    @category = Category.find(1)
+    @category = Category.new
+    @event = Event.new
   end
 
   def create
-    puts params[:event][:time_interval].inspect
-
-    title = params[:event][:title]
+    puts "########################3"
+    puts params.inspect
+    puts "#############################3"
     time_interval = params[:event][:time_interval]
-    category_id = params[:category_id]
     description = params[:event][:description]
-
-    @event = Event.new(title: title, time_interval: time_interval, category_id: category_id, description: description)
-
-    if @event.save
-      flash[:notice] = "Successfully added the event"
-    else
-      flash[:error] = "Failed to add the event"
+    parents_ids = params[:event][:category_tokens].split(",")
+    parents_ids.each do |parent_id|
+      Event.create!(time_interval: time_interval, description: description, category_id: parent_id)
     end
-
-    redirect_to category_path(params[:category_id])
-  end
-
-  def in_database
-    event_titles_array = []
-    Event.uniq.pluck(:title).each do |event_title|
-      event_titles_array << event_title
-    end
-
-    render json: event_titles_array
+    redirect_to(:back)
   end
 
 end

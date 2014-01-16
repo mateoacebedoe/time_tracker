@@ -1,7 +1,8 @@
 class Category < ActiveRecord::Base
   has_many :events
 
-  attr_accessible :title, :parent_id, :id
+  attr_accessible :parent_id, :id, :name
+  attr_reader :category_tokens
 
   def parent
     return Category.find(parent_id)
@@ -61,6 +62,25 @@ class Category < ActiveRecord::Base
     end
   end
 
+  def children_with_times(time_period)
+    children_with_times = Array.new()
+    children.each_with_index do |child|
+      children_info = Hash.new()
+      children_info[:label] = child.name
+      children_info[:data] = child.total_time_spent(time_period)
+      children_with_times << children_info
+    end
+    return children_with_times
+  end
+
+  def self.titles
+    titles = []
+    Category.uniq.pluck(:name).each do |category_title|
+      titles << category_title
+    end
+    return titles
+  end
+
   private
 
   def bread_crumb_html
@@ -90,6 +110,5 @@ class Category < ActiveRecord::Base
     end
     return events_array
   end
-
 end
 

@@ -4,16 +4,17 @@ TimeTracker::Application.routes.draw do
 
   root :to => 'events#index'
 
-  resources :categories, :only => [:create] do
+  resources :categories, :only => [:index, :create] do
     collection do
-      get 'data'
+      get 'pie_data'
       get 'analyze'
-      end
+      get 'titles'
+    end
   end
 
-  resources :events, :only => [:create, :index] do
+  resources :events, :only => [:index, :create] do
     collection do
-      get 'in_database'
+      post 'create_multiple'
     end
   end
 

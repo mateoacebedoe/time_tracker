@@ -1,40 +1,40 @@
 class CategoriesController < ApplicationController
 
+  def index
+    @categories = Category.where("name like ?", "%#{params[:q]}%")
+    respond_to do |format|
+      format.html
+      format.json {render :json => @categories }
+    end
+  end
+
   def analyze
   end
 
-  def data
-    @category = Category.find_by_title(params[:category_name])
+  def pie_data
+    @category = Category.find_by_name(params[:category_name])
     time_period = params[:time_period]
-
-    puts "==============category============="
-    puts params[:category_name]
-    puts "==============category============="
-
-
-    full_data = Hash.new()
-    pie_data = Array.new()
-    @category.children.each_with_index do |child, i|
-      children_info = Hash.new()
-      children_info[:label] = child.title
-      children_info[:data] = child.total_time_spent(time_period)
-      pie_data << children_info
-    end
 
     category_general_data = {
       :time => @category.total_time_spent(time_period),
-      :ancestry_titles => @category.ancestry.map { |category| category.title}
+      :ancestry_titles => @category.ancestry.map { |category| category.name}
     }
 
-    full_data[:pie_data] = pie_data
+    full_data = Hash.new()
+    full_data[:pie_data] = @category.children_with_times(time_period)
     full_data[:category_general_data] = category_general_data
 
     render json: full_data
   end
 
   def create
-    @category = Category.create(title: params[:category][:title], parent_id: params[:parent_id])
-    redirect_to category_path(params[:parent_id])
+    @category = Category.create(name: params[:category][:name], parent_id: params[:category_tokens])
+    redirect_to(:back)
+  end
+
+  def titles
+    titles = Category.titles
+    render json: titles
   end
 
 end

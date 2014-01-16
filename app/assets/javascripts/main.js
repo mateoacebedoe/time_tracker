@@ -1,5 +1,23 @@
 /*menu handler*/
 $(function(){
+
+    //<--tags for logging event-->
+    $("#event_category_tokens").tokenInput("/categories.json", {
+        crossDomain: false,
+        theme: "bootstrap"
+    });
+    //<--tags-->
+
+    //<--tags for logging new category-->
+    $("#category_category_tokens").tokenInput("/categories.json", {
+        crossDomain: false,
+        theme: "bootstrap",
+        tokenLimit: 1
+    });
+    //<--tags-->
+
+
+
     var url = window.location.pathname;
     var activePage = stripTrailingSlash(url);
 
