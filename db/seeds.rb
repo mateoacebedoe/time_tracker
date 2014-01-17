@@ -1,33 +1,17 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+for hr in 0..8
+  for min in 0..5
+    if hr == 0 and min != 0
+      TimeInterval.create!(name: "#{min*10} mins")
+    elsif hr == 1 and min == 0
+      TimeInterval.create!(name: "#{hr} hour")
+    elsif hr == 1
+      TimeInterval.create!(name: "#{hr} hour #{min*10} mins")
+    elsif min == 0 and hr != 0
+      TimeInterval.create!(name: "#{hr} hours")
+    elsif hr != 0
+      TimeInterval.create!(name: "#{hr} hours #{min*10} mins")
+    end
+  end
+end
 
 Category.create(name: "Root", parent_id: 0) #category_id == 1
-Category.create(name: "Exercise", parent_id: 1) #category_id == 2
-Category.create(name: "Self Development", parent_id: 1) #category_id == 3
-Category.create(name: "Soccer", parent_id: 2) #category_id == 4
-Category.create(name: "late afternoon", parent_id: 4) #category_id == 5
-
-
-event1 = Event.create(time_interval: 60, category_id: 4, description: "")
-event1.created_at = 1.years.ago
-event1.save!
-event2 = Event.create(time_interval: 60, category_id: 4, description: "some footy")
-event2.created_at = 5.months.ago
-event2.save!
-
-event3 = Event.create(time_interval: 60, category_id: 3, description: "whatever")
-event3.created_at = 2.weeks.ago
-event3.save!
-
-Event.create(time_interval: 40, category_id: 2, description: "")
-Event.create(time_interval: 60, category_id: 5, description: "")
-Event.create(time_interval: 40, category_id: 5, description: "")
-
-
-
-

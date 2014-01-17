@@ -4,17 +4,20 @@
 
 <div class="well add_elements span3">
   <div class="add_event span12">
+
+    <p><%= @time_of_last_logged_event %></p>
+
     <fieldset>
-      <h2>Add Event</h2>
+      <h3>Add Event</h3>
 
       <%= form_for @event do |f| %>
           <p>
             <%= f.label :category_tokens, "Event Name" %>
-            <%= f.text_field(:category_tokens) %>
+            <%= f.text_field :category_tokens %>
           </p>
           <p>
-            <%= f.label :time_interval %>
-            <%= f.text_field :time_interval %>
+            <%= f.label :time_interval_tokens, "Time Interval" %>
+            <%= f.text_field :time_interval_tokens %>
           </p>
 
           <p>
@@ -33,7 +36,7 @@
 
   <div class="add_category span12">
     <fieldset>
-      <h2>Add Category</h2>
+      <h3>Add Category</h3>
 
       <%= form_for @category do |f| %>
           <p>

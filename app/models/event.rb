@@ -1,9 +1,11 @@
+
 class Event < ActiveRecord::Base
 
   belongs_to :category
+  belongs_to :time_interval
 
-  attr_accessible :title, :time_interval, :category_id, :description, :created_at
-  attr_reader :category_tokens
+  attr_accessible :time_interval_id, :category_id, :description, :created_at, :time_interval
+  attr_reader :category_tokens, :time_interval_tokens
 
   scope :events_for_month, ->(category_id) { where("created_at > ? AND category_id = ?", (Date.today - 1.month), category_id) }
   scope :events_for_6_months, ->(category_id) { where("created_at > ? AND category_id = ?", (Date.today - 6.months), category_id) }
@@ -14,7 +16,7 @@ class Event < ActiveRecord::Base
 
     sum = 0
     events.each do |event|
-      sum += event.time_interval
+      sum += TimeInterval.find(event.time_interval_id).to_hours
     end
 
     return sum

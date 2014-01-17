@@ -15,6 +15,7 @@ TimeTracker::Application.routes.draw do
   resources :events, :only => [:index, :create] do
     collection do
       post 'create_multiple'
+      get 'time_intervals'
     end
   end
 

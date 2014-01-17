@@ -1,4 +1,4 @@
-/*menu handler*/
+
 $(function(){
 
     //<--tags for logging event-->
@@ -16,6 +16,13 @@ $(function(){
     });
     //<--tags-->
 
+    //<--tags for logging event's time interval-->
+    $("#event_time_interval_tokens").tokenInput("/events/time_intervals.json", {
+        crossDomain: false,
+        theme: "bootstrap",
+        tokenLimit: 1
+    });
+    //<--tags-->
 
 
     var url = window.location.pathname;
