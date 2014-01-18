@@ -28,7 +28,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.create(name: params[:category][:name], parent_id: params[:category_tokens])
+    @category = Category.create!(name: params[:category][:name], parent_id: params[:category][:parent_id])
     redirect_to(:back)
   end
 

@@ -2,7 +2,6 @@ class Category < ActiveRecord::Base
   has_many :events
 
   attr_accessible :parent_id, :id, :name
-  attr_reader :category_tokens
 
   def parent
     return Category.find(parent_id)

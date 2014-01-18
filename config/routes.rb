@@ -4,7 +4,7 @@ TimeTracker::Application.routes.draw do
 
   root :to => 'events#index'
 
-  resources :categories, :only => [:index, :create] do
+  resources :categories, :only => [:index, :create, :update] do
     collection do
       get 'pie_data'
       get 'analyze'
@@ -12,12 +12,16 @@ TimeTracker::Application.routes.draw do
     end
   end
 
-  resources :events, :only => [:index, :create] do
+  resources :events, :only => [:index, :create, :update] do
     collection do
       post 'create_multiple'
       get 'time_intervals'
     end
   end
+
+  resources :settings, :only => [:index]
+
+  resources :life_phases, :only => [:create]
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

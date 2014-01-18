@@ -2,14 +2,14 @@
 $(function(){
 
     //<--tags for logging event-->
-    $("#event_category_tokens").tokenInput("/categories.json", {
+    $("#event_category_id").tokenInput("/categories.json", {
         crossDomain: false,
         theme: "bootstrap"
     });
     //<--tags-->
 
     //<--tags for logging new category-->
-    $("#category_category_tokens").tokenInput("/categories.json", {
+    $("#category_parent_id").tokenInput("/categories.json", {
         crossDomain: false,
         theme: "bootstrap",
         tokenLimit: 1
@@ -17,7 +17,7 @@ $(function(){
     //<--tags-->
 
     //<--tags for logging event's time interval-->
-    $("#event_time_interval_tokens").tokenInput("/events/time_intervals.json", {
+    $("#event_time_interval_id").tokenInput("/events/time_intervals.json", {
         crossDomain: false,
         theme: "bootstrap",
         tokenLimit: 1

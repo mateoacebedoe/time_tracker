@@ -7,9 +7,9 @@ class EventsController < ApplicationController
   end
 
   def create
-    time_interval = TimeInterval.find(params[:event][:time_interval_tokens])
+    time_interval = TimeInterval.find(params[:event][:time_interval_id])
     description = params[:event][:description]
-    parents_ids = params[:event][:category_tokens].split(",")
+    parents_ids = params[:event][:category_id].split(",")
     parents_ids.each do |parent_id|
       Event.create!(time_interval: time_interval, description: description, category_id: parent_id)
     end

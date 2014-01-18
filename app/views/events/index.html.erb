@@ -12,12 +12,12 @@
 
       <%= form_for @event do |f| %>
           <p>
-            <%= f.label :category_tokens, "Event Name" %>
-            <%= f.text_field :category_tokens %>
+            <%= f.label :category_id, "Name" %>
+            <%= f.text_field :category_id %>
           </p>
           <p>
-            <%= f.label :time_interval_tokens, "Time Interval" %>
-            <%= f.text_field :time_interval_tokens %>
+            <%= f.label :time_interval_id, "Time Interval" %>
+            <%= f.text_field :time_interval_id %>
           </p>
 
           <p>
@@ -45,8 +45,8 @@
           </p>
 
           <p>
-            <%= f.label :category_tokens, "Category Parent" %>
-            <%= f.text_field(:category_tokens) %>
+            <%= f.label :parent_id, "Parent" %>
+            <%= f.text_field(:parent_id) %>
           </p>
 
           <p>

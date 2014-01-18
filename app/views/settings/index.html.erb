@@ -1,0 +1,53 @@
+<% unless !@last_event %>
+    <div class="well edit_last_event span3">
+        <fieldset>
+          <h3>Edit Event</h3>
+
+          <%= form_for @last_event do |f| %>
+
+              <p>
+                <%= f.label :category_id, "Name" %>
+                <%= f.text_field :category_id %>
+              </p>
+              <p>
+                <%= f.label :time_interval_id, "Time Interval" %>
+                <%= f.text_field :time_interval_id %>
+              </p>
+
+              <p>
+                <%= label_tag(:description) %>
+                <%= f.text_area :description %>
+              </p>
+
+              <p>
+                <%= submit_tag("Create") %>
+              </p>
+
+          <% end %>
+
+        </fieldset>
+    </div>
+<% end %>
+
+<div class="well create_life_phase span3">
+  <fieldset>
+    <h3>Create Life Phase</h3>
+
+    <%= form_for @life_phase do |f| %>
+        <p>
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+        </p>
+
+        <p>
+          <%= f.label :date %>
+          <%= f.date_select :date %>
+        </p>
+
+        <p>
+          <%= submit_tag("Create") %>
+        </p>
+
+    <% end %>
+  </fieldset>
+</div>
